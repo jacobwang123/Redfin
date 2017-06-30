@@ -94,7 +94,7 @@ def assign(thread):
 		temp_list = source_list[thread * trunk : (thread+1) * trunk]
 
 	for i in temp_list:
-		print("Processing:", school_id, ",", school_city)
+		print("Processing:", temp_list[2], ",", temp_list[1])
 		if os.path.exists(os.path.join(DOWNLOAD_DIR, state + "_" + school_id + ".csv")):
 			continue
 		get_properties(i)
