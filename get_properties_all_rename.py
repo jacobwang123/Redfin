@@ -15,12 +15,12 @@ from selenium import webdriver
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-thread_num = 3
+thread_num = 5
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-cmd = os.path.dirname(os.path.realpath(__file__))
-DATA_DIR = os.path.join(cmd, 'chromedriver')
-DOWNLOAD_DIR = os.path.join(cmd, 'downloads')
+cwd = os.path.dirname(os.path.realpath(__file__))
+DATA_DIR = os.path.join(cwd, 'chromedriver')
+DOWNLOAD_DIR = os.path.join(cwd, 'downloads')
 # db = MySQLdb.connect(host="localhost", user="root", passwd="root", db="redfin", charset="utf8")
 # cur = db.cursor()
 hdr = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3', 'Accept-Encoding': 'none','Accept-Language': 'en-US,en;q=0.8','Connection': 'keep-alive'}
@@ -35,7 +35,7 @@ base_url = "https://www.redfin.com/school/108854/IL/Elk-Grove-Village/Elk-Grove-
 
 def get_properties(info):#,proxy):
 	state, school_city, school_id, school_name = info
-	driver = webdriver.Chrome(os.path.join(cmd, 'chromedriver'), chrome_options=options)
+	driver = webdriver.Chrome(os.path.join(cwd, 'chromedriver'), chrome_options=options)
 	driver.set_page_load_timeout(600)
 	driver.get(base_url)
 	time.sleep(5)
@@ -80,7 +80,7 @@ def get_properties(info):#,proxy):
 		os.rename(fname, new_fname)
 	except:
 		print("ERRORS......")
-		with open(os.path.join(cmd, 'exceptions.txt'), 'a') as f:
+		with open(os.path.join(cwd, 'exceptions.txt'), 'a') as f:
 			f.write(state + '|' + school_city + '|' + school_id + '|' + school_name + '\n')
 	print("\n")
 	time.sleep(randint(10,30))
